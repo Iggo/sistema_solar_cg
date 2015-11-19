@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+LIBS +=  -lglut -lGL -lGLU -lGLEW
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -12,9 +13,8 @@ TARGET = sistema_solar_cg
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp
+SOURCES += main.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  +=
 
 FORMS    += mainwindow.ui
