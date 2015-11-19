@@ -28,7 +28,7 @@ void Desenha(void)
     //Executa os comandos OpenGL
     glFlush();
 }
-
+iggo
 // Inicializa parâmetros de rendering
 void Inicializa (void)
 {
