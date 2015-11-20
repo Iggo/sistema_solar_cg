@@ -13,8 +13,10 @@ TARGET = sistema_solar_cg
 TEMPLATE = app
 
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    observador.cpp
 
-HEADERS  +=
+HEADERS  += \
+    observador.h
 
 FORMS    += mainwindow.ui
