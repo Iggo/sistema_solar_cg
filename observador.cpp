@@ -92,6 +92,9 @@ void rotacionaVet(float * v1, float * v2, float angulo, float * v3){
 //Construtor
 Observador::Observador()
 {
+    //inicializa os valores da rotação e do deslocamento
+    deslocamento = 0.005f;
+    rotacao = 0.01f;
     //Inicializa os vetores com as coordenados do observador
     //Esses valores são aleatórios
     setVetor(posicaoObs,0.764331460f, -1.66760659f, 0.642456770);
@@ -135,4 +138,71 @@ void Observador::mudaOrientacao(float *ponto){
     rotacionaVet(frenteObs, direitaObs, 1.57079632679f, temp);
     copiaVet(upObs, temp);
 }
+
+/**Comentar melhor*/
+//move observador para frente
+void Observador::frente(){
+    float vet[3];
+
+    copiaVet(vet, frenteObs);
+    multVet(vet, deslocamento);
+
+    somaVet(posicaoObs, vet);
+}
+
+//move observador para trás
+void Observador::tras(){
+    float vet[3];
+
+    copiaVet(vet, frenteObs);
+    multVet(vet, -deslocamento);
+
+    somaVet(posicaoObs, vet);
+}
+
+//move observador para esquerda
+void Observador::esquerda(){
+    float vet[3];
+
+    copiaVet(vet, direitaObs);
+    multVet(vet, -deslocamento);
+
+    somaVet(posicaoObs, vet);
+}
+
+//move observador para direita
+void Observador::direita(){
+    float vet[3];
+
+    copiaVet(vet, direitaObs;
+    multVet(vet, deslocamento);
+
+    somaVet(posicaoObs, vet);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

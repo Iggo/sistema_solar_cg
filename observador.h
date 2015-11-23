@@ -15,6 +15,12 @@ private:
 
     //posição do observador na cena
     float posicaoObs[3];
+
+    //indice de deslocamento
+    float deslocamento;
+
+    //indice de rotação
+    float rotacao;
 public:
     Observador();
 
