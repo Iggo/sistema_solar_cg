@@ -89,6 +89,7 @@ void rotacionaVet(float * v1, float * v2, float angulo, float * v3){
     multVetMat(v1, mat, v3);
 }
 
+//1
 //Construtor
 Observador::Observador()
 {
@@ -103,12 +104,14 @@ Observador::Observador()
     setVetor(upObs, -0.235630989f, 0.450859368f, 0.860931039f);
 }
 
+//2
 //transformação da visualização da cena
 void Observador::setOrientacao(){
     //define a transformação de visualização
     gluLookAt(0,0,0,frenteObs[0], frenteObs[1], frenteObs[2], upObs[0], upObs[1], upObs[2]);
 }
 
+//4
 //funçao para mudar a orientaçao do observador
 void Observador::mudaOrientacao(float *ponto){
     float temp[3];
@@ -139,6 +142,7 @@ void Observador::mudaOrientacao(float *ponto){
     copiaVet(upObs, temp);
 }
 
+//7
 /**Comentar melhor*/
 //move observador para frente
 void Observador::frente(){
@@ -150,6 +154,7 @@ void Observador::frente(){
     somaVet(posicaoObs, vet);
 }
 
+//8
 //move observador para trás
 void Observador::tras(){
     float vet[3];
@@ -160,6 +165,7 @@ void Observador::tras(){
     somaVet(posicaoObs, vet);
 }
 
+//9
 //move observador para esquerda
 void Observador::esquerda(){
     float vet[3];
@@ -170,20 +176,95 @@ void Observador::esquerda(){
     somaVet(posicaoObs, vet);
 }
 
+//10
 //move observador para direita
 void Observador::direita(){
     float vet[3];
 
-    copiaVet(vet, direitaObs;
+    copiaVet(vet, direitaObs);
     multVet(vet, deslocamento);
 
     somaVet(posicaoObs, vet);
 }
 
+//11
+//rotaciona a direita
+void Observador::rotacionaDireita(void){
+    float temp[3];
+
+    //Gira os vetores para cima e para a direita em torno do eixo de vetor frenteObs
+    rotacionaVet(upObs, frenteObs, rotacao, temp);
+    copiaVet(upObs, temp);
+
+    rotacionaVet(direitaObs, frenteObs, rotacao, temp);
+    copiaVet(direitaObs, temp);
+}
+
+//12
+//rotaciona a esquerda
+void Observador::rotacionaEsquerda(){
+    float temp[3];
+
+    //Gira os vetores para cima e para a direita em torno do eixo de vetor frenteObs
+    rotacionaVet(upObs, frenteObs, -rotacao, temp);//muda o sentido com rotação negativo
+    copiaVet(upObs, temp);
+
+    rotacionaVet(direitaObs, frenteObs, -rotacao, temp);
+    copiaVet(direitaObs, temp);
+}
 
 
+//13
+//Gira o observador para cima
+void Observador::giraCima(){
+    float temp[3];
 
+    //comentar
+    rotacionaVet(frenteObs, direitaObs , rotacao, temp);
+    copiaVet(frenteObs, temp);
 
+    rotacionaVet(upObs, direitaObs, rotacao, temp);
+    copiaVet(upObs, temp);
+}
+
+//14
+//Gira o observador para cima
+void Observador::giraBaixo(){
+    float temp[3];
+
+    //comentar
+    rotacionaVet(frenteObs, direitaObs , -rotacao, temp);
+    copiaVet(frenteObs, temp);
+
+    rotacionaVet(upObs, direitaObs, -rotacao, temp);
+    copiaVet(upObs, temp);
+}
+
+//15
+//comentar
+void Observador::viraDireita(){
+    float temp[3];
+
+    //comentar
+    rotacionaVet(frenteObs, upObs , rotacao, temp);
+    copiaVet(frenteObs, temp);
+
+    rotacionaVet(direitaObs, upObs, rotacao, temp);
+    copiaVet(direitaObs, temp);
+}
+
+//16
+//comentar
+void Observador::viraEsquerda(){
+    float temp[3];
+
+    //comentar
+    rotacionaVet(frenteObs, upObs, -rotacao, temp);
+    copiaVet(frenteObs, temp);
+
+    rotacionaVet(direitaObs, upObs, -rotacao, temp);
+    copiaVet(direitaObs, temp);
+}
 
 
 

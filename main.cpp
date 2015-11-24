@@ -1,7 +1,13 @@
 #include <QApplication>
 #include <GL/glut.h>
 #include <GL/glu.h>
+#include <observador.h>
 
+struct obs{
+    bool frente, tras, esquerda, direita, viraEsquerda, viraDireita, giraCima, giraBaixo, rotacionaDireita, rotacionaEsquerda;
+}obs;
+
+Observador obeservador;
 
 // Função callback chamada para fazer o desenho
 void Desenha(void)
@@ -9,6 +15,13 @@ void Desenha(void)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     //Limpa a janela de visualização com a cor de fundo especificada
+
+    if (obs.frente) obeservador.frente();		if (obs.tras) obeservador.tras();
+    if (obs.esquerda) obeservador.esquerda();			if (obs.direita) obeservador.direita();
+    if (obs.viraEsquerda) obeservador.viraEsquerda();		if (obs.rotacionaDireita) obeservador.rotacionaDireita();
+    if (obs.rotacionaEsquerda) obeservador.rotacionaEsquerda();	if (obs.rotacionaDireita) obeservador.rotacionaDireita();
+    if (obs.giraCima) obeservador.giraCima();		if (obs.giraBaixo) obeservador.giraBaixo();
+
     glClear(GL_COLOR_BUFFER_BIT);
 
     // Especifica que a cor corrente é vermelha
@@ -56,6 +69,83 @@ void AlteraTamanhoJanela(GLsizei w, GLsizei h)
                            gluOrtho2D (0.0f, 250.0f*w/h, 0.0f, 250.0f);
 }
 
+void keyDown(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+
+        // these are all camera controls
+    case 'w':
+        obs.frente = true;
+        break;
+    case 's':
+        obs.tras = true;
+        break;
+    case 'a':
+        obs.esquerda = true;
+        break;
+    case 'd':
+        obs.direita = true;
+        break;
+    case 'l':
+        obs.rotacionaDireita = true;
+        break;
+    case 'j':
+        obs.rotacionaEsquerda = true;
+        break;
+    case 'i':
+        obs.giraBaixo = true;
+        break;
+    case 'k':
+        obs.giraCima = true;
+        break;
+    case 'q':
+        obs.viraEsquerda = true;
+        break;
+    case 'e':
+        obs.viraDireita = true;
+        break;
+    }
+
+}
+
+void keyUp(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+    case 'w':
+        obs.frente = false;
+        break;
+    case 's':
+        obs.tras = false;
+        break;
+    case 'a':
+        obs.esquerda = false;
+        break;
+    case 'd':
+        obs.direita = false;
+        break;
+    case 'l':
+        obs.rotacionaDireita = false;
+        break;
+    case 'j':
+        obs.rotacionaEsquerda = false;
+        break;
+    case 'i':
+        obs.giraBaixo = false;
+        break;
+    case 'k':
+        obs.giraCima = false;
+        break;
+    case 'q':
+        obs.viraEsquerda = false;
+        break;
+    case 'e':
+        obs.viraDireita = false;
+        break;
+    }
+}
+
 
 // Programa Principal
 int main(int argc, char *argv[])
@@ -67,6 +157,8 @@ int main(int argc, char *argv[])
     glutDisplayFunc(Desenha);
     glutReshapeFunc(AlteraTamanhoJanela);
     Inicializa();
+    glutKeyboardFunc(keyDown);
+    glutKeyboardUpFunc(keyUp);
     glutMainLoop();
     return a.exec();
 }
